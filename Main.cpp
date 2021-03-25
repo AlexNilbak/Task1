@@ -11,7 +11,7 @@ int main() {
 
         ifstream input("data.txt");
         if (!input.is_open()) {
-            cout << "Cannot open the file\n";
+            cout << "Cannot open the file" << endl;
             return 1;
         }
         char* str = new char[512];

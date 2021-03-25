@@ -13,19 +13,23 @@ int Vector0::output(const string filename) {
 Vector0 operator+(const Vector& a, const Vector& b) {
 	if (a.n > b.n) {
 		double* d = new double[a.n];
-		b[a.n - 1] = 0;
-		for (int i = 0; i < a.n; i++) {
-			d[i] = a.v[i] + b[i];
+		for (int i = b.n - 1; i < a.n; i++) {
+			d[i] = a.v[i];
+		}
+		for (int i = 0; i < b.n; i++) {
+			d[i] = a.v[i] + b.v[i];
 		}
 		Vector0 res(d, a.n);
 		delete[] d;
 		return res;
 	}
 	if (a.n < b.n) {
-		double* d = new double[a.n];
-		a.v[b.n - 1] = 0;
+		double* d = new double[b.n];
+		for (int i = a.n - 1; i < b.n; i++) {
+			d[i] = b.v[i];
+		}
 		for (int i = 0; i < b.n; i++) {
-			d[i] = a.v[i] + b[i];
+			d[i] = a.v[i] + b.v[i];
 		}
 		Vector0 res(d, a.n);
 		delete[] d;
@@ -43,11 +47,31 @@ Vector0 operator+(const Vector& a, const Vector& b) {
 }
 
 Vector0 operator-(const Vector& a, const Vector& b) {
-	if (a.n != b.n) {
-		printf("Error. Incorrect length\n");
-		return a;
+	if (a.n > b.n) {
+		double* d = new double[a.n];
+		for (int i = b.n - 1; i < a.n; i++) {
+			d[i] = a.v[i];
+		}
+		for (int i = 0; i < b.n; i++) {
+			d[i] = a.v[i] - b.v[i];
+		}
+		Vector0 res(d, a.n);
+		delete[] d;
+		return res;
 	}
-	else {
+	if (a.n < b.n) {
+		double* d = new double[b.n];
+		for (int i = a.n - 1; i < b.n; i++) {
+			d[i] = (-1)*b.v[i];
+		}
+		for (int i = 0; i < b.n; i++) {
+			d[i] = a.v[i] - b.v[i];
+		}
+		Vector0 res(d, a.n);
+		delete[] d;
+		return res;
+	}
+	if (a.n == b.n) {
 		double* d = new double[a.n];
 		for (int i = 0; i < a.n; i++) {
 			d[i] = a.v[i] - b[i];
