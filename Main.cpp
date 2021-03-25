@@ -14,17 +14,17 @@ int main() {
             cout << "Cannot open the file\n";
             return 1;
         }
-        char* str = new char[1024];
+        char* str = new char[512];
         string s;
         int m;
         double d;
         int n = 0;
         while (!input.eof()) {
-            input.getline(str, 1024, '\n');
+            input.getline(str, 512, '\n');
             n++;
         }
         input.seekg(0, ios_base::beg);
-   
+
         Vector** arr;
         arr = new Vector * [n];
         for (int i = 0; i < n; ++i) {
